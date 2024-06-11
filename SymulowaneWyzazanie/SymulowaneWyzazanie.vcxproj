@@ -127,11 +127,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Algorytm.cpp" />
     <ClCompile Include="SymulowaneWyzazanie.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Algorytm.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
