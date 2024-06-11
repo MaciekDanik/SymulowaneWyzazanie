@@ -6,6 +6,7 @@
 #include <chrono>
 #include <thread>
 #include <numeric>
+#include <fstream>
 
 using namespace std;
 
@@ -35,6 +36,7 @@ void Run();
 void Loop();
 void NodeRand();
 void Draw(); // Placeholder for the drawing function
+void SaveTemperatureDataToCSV(const vector<double>& temperatures, const string& filename);
 
 // Random number generator setup
 random_device rd;
@@ -43,6 +45,8 @@ mt19937 gen(rd());
 int main() {
     NodeRand();
     Run();
+
+    SaveTemperatureDataToCSV(saDataTemp, "temperatures.csv");
     return 0;
 }
 
@@ -202,7 +206,23 @@ void Draw() {
         cout << endl;
     }
 
-    cout << "\n"<< "Temperatura: " << saTemp;
-    cout << "\n" << "Najlepsza dlugosc: " << saBestDist;
+    cout << "\n"<< " Temperatura: " << saTemp;
+    cout << "\n" << " Najlepsza dlugosc: " << saBestDist;
     cout << endl;
+}
+
+void SaveTemperatureDataToCSV(const vector<double>& temperatures, const string& filename) {
+    ofstream file(filename);
+
+    if (!file.is_open()) {
+        cerr << "Nie można otworzyć pliku: " << filename << endl;
+        return;
+    }
+
+    file << "Iteracja,Temperatura\n";
+    for (size_t i = 0; i < temperatures.size(); ++i) {
+        file << i + 1 << "," << temperatures[i] << "\n";
+    }
+
+    file.close();
 }
